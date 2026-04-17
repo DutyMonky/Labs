@@ -3,154 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroForensics Lab | GitHub Project</title>
+    <title>NeuroLabs | Empirical Neuro-Forensics</title>
     <style>
         :root {
-            --bg-color: #0a0a0a;
-            --text-color: #e2e8f0;
-            --accent-color: #38bdf8;
-            --card-bg: #171717;
+            --bg: #05070a;
+            --surface: #0f1218;
+            --accent: #00d4ff;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --code-bg: #000000;
         }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
+
+        /* Responsive Header */
         header {
-            padding: 5rem 2rem;
+            padding: 6rem 1.5rem 4rem;
             text-align: center;
-            background: linear-gradient(to bottom, #111827, #0a0a0a);
-            border-bottom: 1px solid #333;
+            background: radial-gradient(circle at top, #1e293b 0%, #05070a 100%);
+            border-bottom: 1px solid #1e293b;
         }
+
         h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-            letter-spacing: -0.02em;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0;
+            letter-spacing: -2px;
+            font-weight: 800;
         }
+
         h1 span {
-            color: var(--accent-color);
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
         }
-        .subtitle {
-            font-size: 1.25rem;
-            color: #94a3b8;
-            max-width: 600px;
-            margin: 0 auto 2rem;
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 1.5rem auto 2.5rem;
         }
+
+        /* Action Buttons */
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: #0f172a;
-            padding: 0.75rem 1.5rem;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
             text-decoration: none;
-            border-radius: 0.375rem;
-            font-weight: bold;
-            transition: background-color 0.2s ease-in-out;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
-        .btn:hover {
-            background-color: #0ea5e9;
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000;
         }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+        }
+
+        /* Content Sections */
         main {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 4rem 1.5rem;
         }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
+
         .card {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 0.5rem;
-            border: 1px solid #262626;
-            transition: transform 0.2s;
+            background: var(--surface);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid #1e293b;
+            transition: border-color 0.3s ease;
         }
+
         .card:hover {
-            transform: translateY(-5px);
+            border-color: var(--accent);
         }
+
         .card h3 {
-            color: var(--accent-color);
             margin-top: 0;
-            font-size: 1.2rem;
+            color: var(--accent);
         }
-        .code-block {
-            background-color: #000;
+
+        /* Terminal Style Code Block */
+        .terminal {
+            background: var(--code-bg);
+            border-radius: 12px;
             padding: 1.5rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            font-family: "Fira Code", monospace;
-            color: #a78bfa;
-            border: 1px solid #333;
-            line-height: 1.5;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid #333;
-            color: #64748b;
             margin-top: 4rem;
+            border: 1px solid #334155;
+            position: relative;
         }
-        .credit {
-            font-size: 0.85rem;
-            margin-top: 1rem;
-            color: #475569;
+
+        .terminal::before {
+            content: "● ● ●";
+            display: block;
+            color: #334155;
+            margin-bottom: 1rem;
+            font-size: 12px;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            color: #38bdf8;
+            word-break: break-all;
+        }
+
+        footer {
+            padding: 4rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid #1e293b;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header { padding-top: 4rem; }
+            .card { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Neuro<span>Forensics</span> Core</h1>
-    <p class="subtitle">Real-time analysis of internal and external human brain behavior, aligned with INCF and SfN architectures.</p>
-    <a href="https://github.com/yourusername/yourproject" class="btn">View on GitHub</a>
+    <h1>Neuro<span>Labs</span></h1>
+    <p class="tagline">
+        Real-time Data Science and Forensics. 
+        Analyzing internal brain behavior via Emotiv telemetry and comparative neuronal synopsis.
+    </p>
+    <div class="cta-group">
+        <a href="https://github.com/dutymonky/labs" class="btn btn-primary">View Project on GitHub</a>
+    </div>
 </header>
 
 <main>
     <section>
-        <h2>Project Overview</h2>
-        <p>This repository houses the predictive logic and data forensics toolkit for processing high-fidelity EEG streams. Designed for rigorous environments, it compares neuronal synopsis states between external motor responses and internal biological baselines, bypassing standard behavioral models to isolate original behavior.</p>
-    </section>
-
-    <section class="grid">
-        <div class="card">
-            <h3>Emotiv Telemetry Integration</h3>
-            <p>Plug-and-play architecture designed for real-time ingestion and analysis of Emotiv device streams, establishing a direct link to raw neural signatures.</p>
-        </div>
-        <div class="card">
-            <h3>Comparative Synopsis</h3>
-            <p>Simultaneous processing pipelines mapping internal cognitive states against external physiological responses, maintaining strict data integrity.</p>
-        </div>
-        <div class="card">
-            <h3>High-Performance Compute</h3>
-            <p>Built for speed and reliability. Leveraging CUDA-accelerated processing and Julia integration on Ubuntu to ensure zero latency during mission-critical data flows.</p>
+        <div class="grid">
+            <div class="card">
+                <h3>Brain-Data Forensics</h3>
+                <p>Implementation of real-time analysis tools for Emotiv EEG devices, focusing on detecting internal behavioral markers through raw neural data streams.</p>
+            </div>
+            <div class="card">
+                <h3>Comparative Synopsis</h3>
+                <p>Mapping the state of neuronal synopsis to compare internal signals against external physical manifestations, ensuring forensic-grade data integrity.</p>
+            </div>
+            <div class="card">
+                <h3>Open Architecture</h3>
+                <p>Designed for alignment with the International Neuroinformatics Coordinating Facility (INCF) standards for reproducible neuroscience.</p>
+            </div>
         </div>
     </section>
 
-    <section style="margin-top: 4rem;">
-        <h2>Quick Start Installation</h2>
-        <p>Clone the repository and initialize the predictive logic core:</p>
-        <div class="code-block">
-            <code>
-git clone https://github.com/yourusername/neuroforensics.git<br>
-cd neuroforensics<br>
-python3 -m venv env<br>
-source env/bin/activate<br>
-pip install -r requirements.txt<br>
-julia --project init_analysis.jl --device emotiv
-            </code>
-        </div>
+    <section class="terminal">
+        <code>
+            # Deployment & Integration<br>
+            git clone https://github.com/dutymonky/labs.git<br>
+            cd labs<br>
+            python3 setup_forensics.py --device emotiv --mode real-time
+        </code>
     </section>
 </main>
 
 <footer>
-    <p>&copy; 2026 NeuroForensics Lab. Open-source under the MIT License.</p>
-    <p class="credit">Acknowledging the foundational framework of John Stein’s Magnocellular Theory.</p>
+    <p>&copy; 2026 Empirical Neuroscientist Diego A. Muñoz Ugalde</p>
+    <p style="margin-top: 1rem; opacity: 0.6;">
+        Built for scientific transparency. References Magnocellular Theory (Stein, J.).
+    </p>
 </footer>
 
 </body>
